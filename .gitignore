@@ -1,0 +1,8 @@
+.vscode
+*.aux
+*.log
+*.out
+*.toc
+RacsoEnv.txt
+reference.fls
+reference.fdb_latexmk

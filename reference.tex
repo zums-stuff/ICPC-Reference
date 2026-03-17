@@ -1,0 +1,1091 @@
+\documentclass[a4paper,landscape]{article}
+\input{config/config}
+\input{config/listing}
+\title{Reference\_ICPC}
+\author{Racso Fractal}
+\date{January 2026}
+\lstset{ style = cpp }
+\pagenumbering{arabic}
+
+\begin{document}
+\twocolumn
+
+\begin{titlepage}
+\newgeometry{
+  top = 1cm,
+  bottom = 1cm,
+  left = 1cm,
+  right = 2.1cm,
+}
+
+\centering\Large
+\begin{minipage}{\textwidth}
+  \centering
+  \begin{minipage}{0.2\textwidth}
+    \includegraphics[width=\textwidth]{media/titlepage/CPCFI.png}
+  \end{minipage}%
+  \begin{minipage}{0.6\textwidth}
+    \centering
+    \textbf{National Autonomous University of México} \\
+    School of Engineering \\
+    Division of Electrical Engineering
+  \end{minipage}%
+  \begin{minipage}{0.2\textwidth}
+    \includegraphics[width=0.75\textwidth]{media/titlepage/FI_logo(rojo).jpg}
+  \end{minipage}
+\end{minipage}
+
+\vfill
+
+{\Huge \textbf{ICPC 2026 Reference}}\\[0.2cm]
+\textit{CPCFI UNAM} \\
+
+\vfill
+
+{\Huge \textbf{FractalTeam}}\\[0.2cm]
+RacsoFractal, zum, edwardsal17
+
+\vfill
+
+\end{titlepage}
+
+\newpage
+\thispagestyle{empty}
+\null
+\newpage
+
+\restoregeometry
+
+\begin{twocolumn}
+  \tableofcontents
+\end{twocolumn}
+
+\twocolumn\newpage\newpage
+
+\section{Template}
+
+\lstinputlisting[
+  style=cpp,
+  caption={Racso's template.},
+  label=lst:template  
+]{code/misc/template.cpp}
+
+\section{C++ Sintaxis}
+
+\subsection{Compilation sentences}
+
+To compile and execute in C++:
+
+\begin{mdframed}[style=terminal]
+\ttfamily\upshape\color{bashLetterColor}\footnotesize
+g++-13 -Wall -o solucion.exe solucion.cpp \\
+g++ -std=c++20 -Wall -o main a.cpp
+./solucion.exe $<$ input.txt $>$ output.txt
+\end{mdframed}
+
+To compile and execute in Java:
+
+\begin{mdframed}[style=terminal]
+\ttfamily\upshape\color{bashLetterColor}\footnotesize
+javac -Xlint Solucion.java \\
+java Solucion $<$ input.txt $>$ output.txt
+\end{mdframed}
+
+To execute in Python (two options):
+
+\begin{mdframed}[style=terminal]
+\ttfamily\upshape\color{bashLetterColor}\footnotesize
+python3 solucion.py < input.txt > output.txt\\
+pypy3 solucion.py < input.txt > output.txt
+\end{mdframed}
+
+\subsection{Custom comparators}
+
+\lstinputlisting[
+  style=cpp,
+  caption={Template for custom sorting, using as example ordering a vii ascending by second element.},
+  label=lst:custom-sorting  
+]{code/misc/custom-sorting.cpp}
+
+\subsection{*STL DS Usage}
+
+\subsection{*Strings methods}
+
+\subsection{Pragmas}
+
+\lstinputlisting[
+  style=cpp,
+  caption={Common pragmas.},
+  label=lst:pragmas  
+]{code/misc/pragmas.cpp}
+
+\subsection{Bit Manipulation Cheat Sheet}
+
+\textbf{Bitwise operators:}
+
+\begin{itemize}
+    \item \texttt{\&} (AND): Sets each bit to 1 if both bits are 1.
+    \item \texttt{|} (OR): Sets each bit to 1 if al teast one bit is 1.
+  \item $\wedge$ (XOR): Sets each bit to 1 if bits are different.
+    \item \texttt{$\sim$} (NOT): Inverts all bits.
+    \item \texttt{<<} (Left shift): Shifts bits left, fills with 0.
+    \item \texttt{>>} (Right shift): Shifts bits right.
+\end{itemize}
+
+\noindent\textbf{Basic Bit Tasks:}
+
+\begin{itemize}
+    \item Get bit: \texttt{(n \& (1 << i)) != 0}
+    \item Set bit: \texttt{n | (1 << i)}
+    \item Clear bit: \texttt{n \& $\sim$(1 << i)}
+    \item Toggle bit: \texttt{n $\wedge$ (1 << i)}
+    \item Clear LSB: \texttt{n \& (n - 1)}
+    \item Get LSB: \texttt{n \& -n}
+\end{itemize}
+
+\noindent\textbf{Set Operations:}
+
+\begin{itemize}
+    \item Subset check: \texttt{(A \& B) == B}
+    \item Set union: \texttt{A | B}
+    \item Set intersection: \texttt{A \& B}
+    \item Set difference: \texttt{A \& $\sim$B}
+    \item Toggle subset: \texttt{A \^ B}
+\end{itemize}
+
+\noindent\textbf{Equations:}\par\vspace{0.5\baselineskip}
+
+Properties of bitwise:
+\begin{itemize}
+  \item \texttt{a | b = a } $\oplus$ \texttt{ b + a \& b}
+  \item \texttt{a } $\oplus$ \texttt{ (a \& b) = (a | b) } $\oplus$ \texttt{ b} 
+  \item \texttt{b } $\oplus$ \texttt{ (a \& b) = (a | b) } $\oplus$ \texttt{ a} 
+  \item \texttt{(a \& b) } $\oplus$ \texttt{ (a | b) = a } $\oplus$ \texttt{b}
+\end{itemize}
+
+In addition and substraction:
+\begin{itemize}
+  \item \texttt{a + b = (a | b) + (a \& b)}
+  \item \texttt{a + b = a } $\oplus$ \texttt{b + 2 (a \& b)}
+  \item \texttt{a - b = (a } $\oplus$ \texttt{(a \& b)) - ((a | b) } $\oplus$ \texttt{a)} )
+  \item \texttt{a - b = ((a | b)} $\oplus$ \texttt{b) ) - ( (a | b)} $\oplus$ \texttt{a} )
+  \item \texttt{a - b = (a} $\oplus$ \texttt{(a \& b)) - (b} $\oplus$ \texttt{(a \& b) )}
+  \item \texttt{a - b = ((a | b)} $\oplus$ \texttt{b) ) - (b} $\oplus$ \texttt{(a \& b) )}
+\end{itemize}
+
+\noindent\textbf{Gray code:} \texttt{G = B } $\oplus$ \texttt{ (B >> 1)}\par\vspace{\baselineskip}
+
+\noindent\textbf{C++ built in functions:}
+
+\begin{itemize}
+  \item \texttt{\_\_builtin\_popcount(x)} - Count the number of set bits in x.
+  \item \texttt{\_\_builatin\_clz(x)} - Count the number of leading zeros in x.
+  \item  \texttt{\_\_builtint\_ctz(x)} - Count the number of trailing zeros in x.
+\end{itemize}
+
+\subsection{Comparing Floats}
+
+\begin{lstlisting}[
+    style=cpp,
+    caption={Check if two real numbers are equal using an épsilon scope.},
+    label=lst:comparing-floats
+]
+long double a, b, EPS = 1e-9;
+if( abs(a - b) < EPs ) {
+    // 'a' equals 'b'
+}
+\end{lstlisting}
+
+\subsection{Ceil}
+
+\[ \Bigl\lceil \frac{a}{b} \Bigr\rceil = \frac{a + b - 1}{b}\]
+
+(Originally I though $\lceil \frac{a}{b} \rceil = \frac{a - 1}{b}+1$, but this calculates the wrong way in the cases where $a = 0$)
+
+\begin{lstlisting}[
+    style=cpp,
+    caption={A way to do ceil operation between integers without making explicit conversions. \texttt{a} and \texttt{b} are \texttt{int}, but the operation \texttt{a+b-1} can cause an overflow, so they must be casted into \texttt{long long} to avoid this. The result must be \texttt{int} anyway.},
+    label=lst:ceil
+]
+int myCeil(long long a, long long b) {
+    return (a + b - 1)/b;
+}
+\end{lstlisting}
+
+\section{Miscellaneous}
+
+\subsection{Binary Search}
+
+\lstinputlisting[
+  style=cpp,
+  caption={Classic (Vanilla) implementation of Binary Search. Returns the index where \texttt{target} was found. Binary Search works on $O(log_2(n))$, let $n$ be the size of the container.},
+  label=lst:vanilla-binary-search  
+]{code/misc/binary-search.cpp}
+
+\lstinputlisting[
+  style=cpp,
+  caption={Logarithmic jumps implementation of Binary Search. Returns the index where \texttt{target} was found. Binary Search works on $O(log_2(n))$, let $n$ be the size of the container.},
+  label=lst:logjumps-binary-search  
+]{code/misc/logarithmic-binary-search.cpp}
+
+\lstinputlisting[
+  style=cpp,
+  caption={Binary Search implementation for searching an element in the interval \ensuremath{\big( numbers_{i-1}, numbers_i \big]}. Originally used on Codeforces problem 474 - B (Worms). Returns the index where \texttt{target} was found. Binary Search works on \ensuremath{O(\log_2(n))}, let \ensuremath{n} be the size of the container.},
+  label=lst:worms-binary-search  
+]{code/misc/worms-binary-search.cpp}
+
+\lstinputlisting[
+  style=cpp,
+  caption={Implementation of Binary Search in the Answer. Originally used on CSES problem \textit{Factory Machines}. Binary Search works on \ensuremath{O(\log_2(n))}, let \ensuremath{n} be the size of the container.},
+  label=lst:binary-search-in-the-answer 
+]{code/misc/binary-search-in-the-answer.cpp}
+
+\subsubsection{*Parallel Binary Search}
+
+\subsubsection{*Ternary Search}
+
+\subsection{Kadane's Algorithm}
+
+\lstinputlisting[
+  style=cpp,
+  caption={Uses Kadane's Algorithm to find maximum subarray sum in $O(n)$.},
+  label=lst:kadanes-algorithm
+]{code/misc/kadane.cpp}
+
+\section{Queries}
+
+\subsection{Prefix Sum 2D}
+
+\lstinputlisting[
+  style=cpp,
+  caption={Construction and querie of how many 1's are there in a matrix. Originally used on \textit{Forest Queries} from CSES.},
+  label=lst:prefix-sum-2d 
+]{code/queries/prefix-sum-2d.cpp}
+
+\subsection{*Sqrt Decomposition}
+
+\subsection{Fenwick Tree (BIT)}
+
+Let $f$ be some group operation (a binary \textbf{associative} function over a set with an \textbf{identity} and \textbf{inverse} elements) and $A$ be an array of integers of length $N$. Denote $f$'s infix function as $*$; that is, $f(x,y) = x * y$ for arbitrary integers $x, y$.
+
+The Fenwick tree is a data structure which:
+
+\begin{itemize}
+  \item Calculates tha value of function $f$ in the given range $[l,r]$ (i.e. $A_l * A_{l+1} * \cdots * A_r$) in $O(log_N)$ time.
+  \item Updates the value of an element of $A$ in $O(log_N)$ time.
+\end{itemize}
+
+\textbf{Operations supported by BIT:} sum, XOR, counting frequencies, order statistics.
+
+\textbf{Operations \underline{not} supported by BIT:} minimum, maximum, gcd, and / or.
+
+BIT basically obtains ranges by substracting prefixes: $range(l,r) = prefix(r) * prefix(l-1)$.
+
+\lstinputlisting[
+  style=cpp,
+  caption={BIT implementation for sum queries. Builds in $O(n log n)$, queries in $O(logn)$.},
+  label=lst:fenwick-tree
+]{code/queries/fenwick-tree.cpp}
+
+\subsubsection{2D Fenwick Tree (BIT)}
+
+\lstinputlisting[
+  style=cpp,
+  caption={2D BIT implementation for sum queries. Builds in $O(n log n)$, queries in $O(logn)$.},
+  label=lst:fenwick-tree-2d
+]{code/queries/fenwick-tree-2d.cpp}
+
+\subsection{Segment Tree}
+
+\lstinputlisting[
+  style=cpp,
+  caption={Segment Tree for Dynamic Range \textbf{Minimum} Queries. Racso's Implementation.},
+  label=lst:segment-tree-racso
+]{code/queries/segment-tree-racso.cpp}
+
+\lstinputlisting[
+  style=cpp,
+  caption={Segment Tree for Dynamic Range \textbf{Sum} Queries. Zum's Implementation.},
+  label=lst:segment-tree-zum
+]{code/queries/segment-tree-zum.cpp}
+
+\subsubsection{*2D Segment Tree}
+
+\subsubsection{*Persistent Segment Tree}
+
+\subsubsection{*Lazy Propagation}
+
+\subsection{*Merge Sort Tree}
+
+\subsection{Ordered Set}
+
+\lstinputlisting[
+  style=cpp,
+  caption={Ordered set necessary includes in header, declaration of the object, and usage of its new methods.},
+  label=lst:ordered-set
+]{code/queries/ordered-set.cpp}
+
+\subsubsection{Multi-Ordered Set}
+
+\lstinputlisting[
+  style=cpp,
+  caption={Declaration of multi-oset structure.},
+  label=lst:multi-ordered-set
+]{code/queries/multi-ordered-set.cpp}
+
+\subsection{*Treap}
+
+\subsection{*Trie}
+
+\section{Graph Theory}
+
+\subsection{Breadth-First Search (BFS)}
+
+\lstinputlisting[
+  style=cpp,
+  caption={Iterative implementation of BFS graph traversal over a graph represented as a AdjacencyList on vector of vectors. BFS runs in $O(|V| + |E|)$.},
+  label=lst:bfs
+]{code/graphs/bfs.cpp}
+
+\lstinputlisting[
+  style=cpp,
+  caption={BFS on Grid to find shortest path from an starting point \textit{A} to an end \textit{B}. Once the path is found, it reconstruct it with movements \textit{LRUD}. Works in $O(n \cdot m)$. Originally used on problem \textit{Labyrinth} from CSES.},
+  label=lst:bfs-grid
+]{code/graphs/bfs-grid.cpp}
+
+\subsection{Deep-First Search (DFS)}
+
+\lstinputlisting[
+  style=cpp,
+  caption={Recursive implementation of DFS graph traversal over a graph represented as a AdjacencyList on vector of vectors. DFS runs in $O(|V| + |E|)$.},
+  label=lst:dfs-recursive
+]{code/graphs/dfs-recursive.cpp}
+
+\lstinputlisting[
+  style=cpp,
+  caption={Iterative implementation of DFS graph traversal over a graph represented as a AdjacencyList on vector of vectors. DFS runs in $O(|V| + |E|)$.},
+  label=lst:dfs-iterative
+]{code/graphs/dfs-iterative.cpp}
+
+\lstinputlisting[
+  style=cpp,
+  caption={DFS implementation with a lambda function (adjacency list and visited don't need to be passed thorough argument). DFS runs in $O(|V| + |E|)$.},
+  label=lst:dfs-lambda
+]{code/graphs/dfs-lambda.cpp}
+
+\lstinputlisting[
+  style=cpp,
+  caption={DFS implementation with a lambda function implemented with a map instead of vector of vectors, and a set to track visited nodes. DFS runs in $O(|V| + |E|)$.},
+  label=lst:dfs-lambda-map
+]{code/graphs/dfs-lambda-map.cpp}
+
+\subsection{Shortest Path}
+
+\subsubsection{Dijkstra's Algorithm}
+
+\lstinputlisting[
+  style=cpp,
+  caption={Iterative implementation of Dijkstra's Algorithm for shortest path. Returns a vector with the shortest path to every other vertex in the graph. $O(|E|\times log_2(|V|))$. doesn't work with negative weights.},
+  label=lst:dijkstra
+]{code/graphs/dijkstra.cpp}
+
+\lstinputlisting[
+  style=cpp,
+  caption={Iterative implementation of Dijkstra's Algorithm as a Lambda Function for shortest path over an adjacency list. Returns a vector with the shortest path to every other vertex in the graph. $O(|E|\times log_2(|V|))$. Doesn't work with negative weights.},
+  label=lst:dijkstra-lambda
+]{code/graphs/dijkstra-lambda.cpp}
+
+\subsubsection{Bellman–Ford Algorithm}
+
+\lstinputlisting[
+  style=cpp,
+  caption={Finds the shortest route from a source vertex, to every other one in the graph. Works over a list of edges. Runs in $O(|V| \times |E|)$. Can be used to find negative cycles.},
+  label=lst:bellman-ford
+]{code/graphs/bellman-ford.cpp}
+
+\subsubsection{Floyd-Warshall Algorithm}
+
+\lstinputlisting[
+  style=cpp,
+  caption={Implementation of Floyd Warshall's Algorithm for finding APSP (\textit{All Pairs Shortest Path}). Runs in $O(|V|^3)$, work with negative weights and cand detect negative cycles (if \texttt{dist[i][i] < 0}).},
+  label=lst:floyd-warshall
+]{code/graphs/floyd-warshall.cpp}
+
+\subsection{Minimum Spanning Tree (MST)}
+
+\subsubsection{Prim's Algorithm}
+
+\lstinputlisting[
+  style=cpp,
+  caption={Implementation of Prim's Algorithm that returns the total weight of the MST in a adjacency list. Runs in $O(|E| log |V|)$.},
+  label=lst:prim
+]{code/graphs/prim.cpp}
+
+\subsubsection{*Kruskal's Algorithm}
+
+\subsection{*Bipartite Checking}
+
+\subsection{*Negative Cycles}
+
+\subsection{Topological Sort}
+
+\lstinputlisting[
+  style=cpp,
+  caption={Recursive toposort implementation for unweighted DAG through vvi with DFS with inverted postorder. Runs in $O(|V| \times |E|)$.},
+  label=lst:toposort-dfs
+]{code/graphs/toposort-dfs.cpp}
+
+\lstinputlisting[
+  style=cpp,
+  caption={Kahn's Algorithm for Topological Sorting using BFS and indegree vertex analysis (nodes in a cycle will never have indegree zero). Works over unweighted directed graphs containing cycles through vvi. Runs in $O(|V| \times |E|)$.},
+  label=lst:toposort-kahn
+]{code/graphs/toposort-kahn.cpp}
+
+\subsection{Disjoint Set Union (DSU)}
+
+\lstinputlisting[
+  style=cpp,
+  caption={Template and usage of DSU with path compression. Complexity of $O(m \; \alpha (n))$ for a sequence of $m$ operations over $n$ elements. Where $\alpha$ denotes Ackerman function, where $\alpha (n) \leq 4, \forall n \leq 10^{18}$. Practically $O(1)$.},
+  label=lst:dsu
+]{code/graphs/dsu.cpp}
+
+\subsection{Strongly Connected Components (SCC)}
+
+\subsubsection{Kosaraju's Algorithm}
+
+\lstinputlisting[
+  style=cpp,
+  caption={Template for implementing Kosaraju's and obtaining the condensed graph, and list of components for 1-indexed adjacency list. Runs in $O(|V| + |E|)$.},
+  label=lst:kosaraju
+]{code/graphs/kosaraju.cpp}
+
+\subsubsection{*Tarjan's Algorithm}
+
+\subsection{2-SAT}
+
+\lstinputlisting[
+    style=cpp,
+    caption={2-SAT implementation from \texttt{cp-algorithms.com}. Each component added is a expression of the form $a \vee b$, which is equivalent to $\neg a \Rightarrow b \wedge \neg b \Rightarrow a$ (if one of the variables is false, then the other one must be true). A directed graph is constructed based on these implication: For each $x$, there's two vertices $v_x$ and $v_{\neg x}$. If there is an edge $a \Rightarrow b$, then there also is an edge $\neg b \Rightarrow \neg a$. For any $x$, if $x$ is reachable from $\neg x$ and $\neg x$ is reachable from $x$, the problem has no solution. This means, each variable must be in a different SCC than their negative. This is verified by the method \texttt{solve\_2SAT()}, which returns a boolean: \texttt{True} if it has a solution and \texttt{False} if it doesn't.},
+    label=lst:2-sat
+]{code/graphs/2-sat.cpp}
+
+\paragraph{Giant Pizza}
+
+How does a particular 2-SAT problem look like?
+Following is the statement for the problem CSES 1684 (Giant Pizza):
+
+\begin{IOFrame}
+\sffamily\raggedright
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.4em}
+Uolevi's family is going to order a large pizza and eat it together. A total of n family members will join the order, and there are m possible toppings. The pizza may have any number of toppings.
+Each family member gives two wishes concerning the toppings of the pizza. The wishes are of the form "topping $x$ is good/bad". Your task is to choose the toppings so that at least one wish from everybody becomes true (a good topping is included in the pizza or a bad topping is not included).
+
+\textbf{Input} \\[0.1cm]
+
+\noindent The first input line has two integers $n$ and $m$: the number of family members and toppings. The toppings are numbered $1,2,\dots,m$.
+    After this, there are $n$ lines describing the wishes. Each line has two wishes of the form $"+ x"$ (topping $x$ is good) or $"- x"$ (topping $x$ is bad).\\
+
+\vspace{5px}
+\textbf{Output} \\[0.1cm]
+
+\noindent Print a line with $m$ symbols: for each topping "+" if it is included and "-" if it is not included. You can print any valid solution.
+If there are no valid solutions, print "IMPOSSIBLE".
+\end{IOFrame}
+
+\begin{lstlisting}[
+    style=cpp,
+    caption={Main method for solving CSES 1684 Giant Pizza using 2-SAT template.},
+    label=lst:2-sat-giant-pizza
+]
+int main(){
+    fastIO();
+    int n = nxt(), m = nxt();
+    TwoSatSolver TwoSat(m);
+
+    fori(i, 0, n){
+        char type1, type2;
+        int top1, top2;
+        cin >> type1 >> top1 >> type2 >> top2;
+
+        top1--; top2--;
+        TwoSat.add_disjunction(top1, type1 == '-', top2, type2 == '-');
+    }
+
+    if(TwoSat.solve_2SAT()){
+        fori(i, 0, m){
+            if(TwoSat.assignment[i])
+                cout << "+ ";
+            else 
+                cout << "- "; 
+        }
+    }
+    else cout << "IMPOSSIBLE";
+    return 0;
+}
+\end{lstlisting}
+
+\subsection{*Bridges and point articulation}
+
+\subsection{Flood Fill}
+
+\lstinputlisting[
+  style=cpp,
+  caption={Traverse a matrix of 'n' x 'm' on grid representation. The matrix is composed of '.' for a valid space (empty), '\#' for a wall, 'T' for a trap, and a number for a treasure. This implementation takes the sum of every treasure in the maze. The condition for moving to the next location is that there are no Traps nearby (up, down, left, right), so the player will never be killed while traversing. It also implements a way to read numerous test cases, but without knowing beforehand how many there are. Runs in $O(n \cdot m)$. Originally used on the problem \textit{Treasures} from \textit{2024-2025 ICPC Bolivia Pre-National Contest}.},
+  label=lst:flood-fill
+]{code/graphs/flood-fill.cpp}
+
+\subsection{Lava Flow (Multi-source BFS)}
+
+\lstinputlisting[
+  style=cpp,
+  caption={Classic Lava Flow problem implementation, where the timer from the starting point \textit{A} needs to be less than every other in the MS-BFS starting in \textit{M} places. Once one edge is reached, the path is reconstructed from the output. Runs in BFS complexity $O(|V| + |E)$. Originally used in the CSES problem \textit{Monsters}.},
+  label=lst:lava-flow
+]{code/graphs/lava-flow.cpp}
+
+\subsection{MaxFlow}
+
+\subsubsection{Dinic's Algorihtm}
+
+\lstinputlisting[
+  style=cpp,
+  caption={Commented template for solving MaxFlow problems with Dinic's algorithm. Works in complexity $O(|V|^2\times|E|)$. In bipartite graphs and graphs with unitary max capacity the complexity turns $O(|E|\times\sqrt{|V|})$.},
+  label=lst:max-flow_template
+]{code/graphs/dinics.cpp}
+
+\paragraph{Download Speed}
+
+How does a particular flow problem looks like?
+Following is the statement for the problem CSES 1694 (Download Speed):
+
+\begin{IOFrame}
+\sffamily\raggedright
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.4em}
+Consider a network consisting of $n$ computers and $m$ connections. Each connection specifies how fast a computer can send data to another computer. \\[0.2cm]
+Kotivalo wants to download some data from a server. What is the maximum speed he can do this, using the connections in the network? \\
+
+\textbf{Input} \\[0.1cm]
+
+\noindent The first input line has two integers $n$ and $m$: the number of computers and connections. The computers are numbered $1,2,\dots,n$. Computer $1$ is the server and computer $n$ is Kotivalo's computer. \\[0.2cm]
+After this, there are $m$ lines describing the connections. Each line has three integers $a$, $b$, and $c$: computer $a$ can send data to computer $b$ at speed $c$. \\
+
+\textbf{Output} \\[0.1cm]
+
+\noindent Print one integer: the maximum speed Kotivalo can download data.
+\end{IOFrame}
+
+\begin{lstlisting}[
+    style=cpp,
+    caption={Main method for solving CSES 1697 Download Speed using MaxFlow template.},
+    label=lst:max-flow_dowload-speed
+]
+int main()
+{
+    fastIO();
+
+    int n, m, u, v, w;
+
+    cin >> n >> m;
+
+    Dinic flow(n+1,1,n); // size n+1 to fix 0-indexed indexes, 1 is the source (server), 'n' is the sink (Kotivalo)
+
+    fori(i,0,m)
+    {
+        cin >> u >> v >> w;
+        flow.addEdge(u,v,w);
+    }
+
+    cout << flow.maxFlow() << endl;
+
+    return 0;
+}
+\end{lstlisting}
+
+\paragraph{Police Chase}
+
+\textbf{Max Flow-Min Cut Theorem:} MaxFlow $=$ MinCut.
+
+Following is the statement for the problem CSES 1695 (Police Chase):
+
+\begin{IOFrame}
+\sffamily\raggedright
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.4em}
+Kaaleppi has just robbed a bank and is now heading to the harbor. However, the police wants to stop him by closing some streets of the city. \\[0.2cm]
+What is the minimum number of streets that should be closed so that there is no route between the bank and the harbor? \\
+
+\textbf{Input} \\[0.1cm]
+
+\noindent The first input line has two integers $n$ and $m$: the number of crossings and streets. The crossings are numbered $1,2,\dots,n$. The bank is located at crossing $1$, and the harbor is located at crossing $n$. \\[0.2cm]
+After this, there are $m$ lines that describing the streets. Each line has two integers $a$ and $b$: there is a street between crossings $a$ and $b$. All streets are two-way streets, and there is at most one street between two crossings. \\
+
+\textbf{Output} \\[0.1cm]
+
+\noindent First print an integer $k$: the minimum number of streets that should be closed. After this, print $k$ lines describing the streets. You can print any valid solution.
+\end{IOFrame}
+
+\begin{lstlisting}[
+    style=cpp,
+    caption={Main method for solving CSES 1695 Police Chase using MaxFlow template.},
+    label=lst:max-flow_police-chase
+]
+int main()
+{
+    fastIO();
+
+    int n, m, u, v;
+    vii minCut;
+
+    cin >> n >> m;
+
+    Dinic flow(n+1,1,n); // size n+1 to fix 0-indexed indexes, 1 is the source (bank), 'n' is the sink (harbor)
+
+    fori(i,0,m)
+    {
+        cin >> u >> v;
+        flow.addEdge(u,v,1);
+        flow.addEdge(v,u,1);
+    }
+
+    flow.maxFlow();
+    minCut = flow.minCut();
+    
+    cout << (sz(minCut)/2) << endl;
+    for(int i = 0; i < sz(minCut); i += 2)
+        cout << minCut[i].fi << " " << minCut[i].se << endl;
+
+    return 0;
+}
+\end{lstlisting}
+
+\paragraph{School Dance}
+
+MaxFlow $=$ MinCut $=$ MaxMatching.
+
+Following is the statement for the problem CSES 1696 (School Dance):
+
+\begin{IOFrame}
+\sffamily\raggedright
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.4em}
+There are n boys and m girls in a school. Next week a school dance will be organized. A dance pair consists of a boy and a girl, and there are k potential pairs. \\[0.2cm]
+Your task is to find out the maximum number of dance pairs and show how this number can be achieved. \\
+
+\textbf{Input} \\[0.1cm]
+
+\noindent The first input line has three integers $n$, $m$ and $k$: the number of boys, girls, and potential pairs. The boys are numbered $1,2,\dots,n$, and the girls are numbered $1,2,\dots,m$. \\[0.2cm]
+After this, there are $k$ lines describing the potential pairs. Each line has two integers $a$ and $b$: boy $a$ and girl $b$ are willing to dance together. \\
+
+\textbf{Output} \\[0.1cm]
+
+\noindent First print one integer $r$: the maximum number of dance pairs. After this, print $r$ lines describing the pairs. You can print any valid solution.
+\end{IOFrame}
+
+\begin{lstlisting}[
+    style=cpp,
+    caption={Main method for solving CSES 1696 School Dancing using MaxFlow template.},
+    label=lst:max-flow_school-dance
+]
+int main()
+{
+    fastIO();
+
+    int n, m, k, a, b;
+    ll maxPairs;
+    vii pairs;
+
+    cin >> n >> m >> k;
+
+    Dinic flow(n+m+2,0,n+m+1);
+
+    fori(boy,0,n+1)
+        flow.addEdge(0,boy,1);
+
+    fori(girl,n+1,n+m+1)
+        flow.addEdge(girl,n+m+1,1);
+
+    fori(i,0,k)
+    {
+        cin >> a >> b;
+        flow.addEdge(a,n+b,1);
+    }
+
+    maxPairs = flow.maxFlow();
+    pairs = flow.maximumMatching();
+
+    cout << maxPairs << endl;
+    fori(i,0,sz(pairs))
+        cout << pairs[i].fi << " " << (pairs[i].se - n) << endl;;
+
+    return 0;
+}
+\end{lstlisting}
+
+\subsubsection{*Ford-Fulkerson Algorithm}
+
+\subsubsection{*Goldber-Tarjan Algorithm}
+
+\section{Trees}
+
+\subsection{Counting Childrens}
+
+\lstinputlisting[
+  style=cpp,
+  caption={Algorithm that counts how many childrens does every node have, from 2..n in a rooted tree (root = 1).},
+  label=lst:counting-childrens
+]{code/trees/counting-childrens.cpp}
+
+\subsection{Tree Diameter}
+
+\lstinputlisting[
+  style=cpp,
+  caption={Calculates the length of Tree Diameter using a DP approach. Runs in $O(|V|)$.},
+  label=lst:tree-diameter-dp
+]{code/trees/tree-diameter-dp.cpp}
+
+\lstinputlisting[
+  style=cpp,
+  caption={Calculates the length of Tree Diameter using the double DFS mehtod. Runs in $O(|V|)$.},
+  label=lst:tree-diameter-dfs
+]{code/trees/tree-diameter-dfs.cpp}
+
+\subsection{*Centroid Decomposition}
+
+\subsection{*Euler Tour}
+
+\subsection{*Lowest Common Ancestor (LCA)}
+
+\subsection{*Heavy-Light Decomposition (HLD)}
+
+\section{Strings}
+
+\subsection{Knuth-Morris-Pratt Algorithm (KMP)}
+
+\lstinputlisting[
+  style=cpp,
+  caption={KMP algorithm for counting how many times a pattern appear into a string. Runs in $O(n+m)$.},
+  label=lst:kmp
+]{code/strings/kmp.cpp}
+
+\subsection{*Suffix Array}
+
+\subsection{*Rolling Hashing}
+
+\subsection{*Z Function}
+
+\subsection{*Aho-Corasick Algorithm}
+
+\section{Dynamic Programming}
+
+\subsection{*Coins}
+
+\subsection{*Longest Increasing Subsequence (LIS)}
+
+\subsection{Edit Distance}
+\lstinputlisting[
+  style=cpp,
+  caption={Dynamic Programming Edit Distance Implementation},
+  label=lst:edit-distance
+]{code/dp/edit-distance.cpp}
+
+
+\subsection{*Knapsack}
+
+\subsection{*SOS DP}
+
+\subsection{*Digit DP}
+
+\subsection{*Bitmask DP}
+
+\section{Mathematics}
+
+\subsection{Number Theory}
+
+\subsubsection{Greatest Common Divisor (GCD)}
+
+\lstinputlisting[
+  style=cpp,
+  caption={Implementation of handmade GCD, because using \texttt{gcd()} runs slow with long long, also \texttt{\_\_gcd()}.},
+  label=lst:gcd
+]{code/maths/gcd.cpp}
+
+\subsubsection{Gauss Sum}
+
+The sum of the first $n$ natural numbers in $O(1)$.
+
+\begin{align}
+    S &= \frac{n \, (n+1)}{2} \\[0.3cm]
+    n &= \sqrt{2S+\frac{1}{4}} \, - \, \frac{1}{2}
+\end{align}
+
+\begin{lstlisting}[
+    style=cpp,
+    caption={Implementation of the Gauss Sum.},
+    label=lst:gauss-sum
+]
+int S = (1LL * n * (1LL * n + 1LL))/2;
+int n = (int)( sqrt( 2 * S + 0.25 ) - 0.5 )
+\end{lstlisting}
+
+\subsubsection{Fermat's Little Theorem}
+
+\begin{align*}
+  a^{-1} &\equiv 1 \pmod{p} \quad \forall p \; \text{primo}, \; (a,p) = 1 \\
+a^{p-2} \cdot a &= 1 \\
+\Rightarrow a^{-1} &\equiv a^{p-2} \pmod{p}
+\end{align*}
+
+\subsubsection{Modulo Inverse}
+
+\lstinputlisting[
+  style=cpp,
+  caption={Computes $a^{-1} (m)$ in $O(log(MOD))$.},
+  label=lst:modulo-inverse
+]{code/maths/modulo-inverse.cpp}
+
+\subsubsection{*Chinese Remainder Theorem}
+
+\subsubsection{Binpow}
+
+\lstinputlisting[
+  style=cpp,
+  caption={Applying binary exponentiation to a problem requiring $a^b \, mod(10^9+7)$ in $O(log_2(b))$.},
+  label=lst:binpow
+]{code/maths/binpow.cpp}
+
+\subsubsection{Prime checking}
+
+\lstinputlisting[
+  style=cpp,
+  caption={Returns if $n$ is a prime number in $O(\sqrt{n})$. Avoids overflow $\forall \; n \leq 10^6$ ($\approx INT\_MAX$).},
+  label=lst:prime-checking
+]{code/maths/prime-checking.cpp}
+
+\subsubsection{Prime factorization}
+
+\lstinputlisting[
+  style=cpp,
+  caption={Returns prime factorization of the number $n$ using \textit{trial division}, simplest way. Runs in $O(\sqrt{n})$. e.g. for 12 the result is 2x2x3.},
+  label=lst:prime-factorization
+]{code/maths/prime-factorization.cpp}
+
+\subsubsection{Sieve of Eratosthenes}
+
+\lstinputlisting[
+  style=cpp,
+  caption={Calculates every prime number up to $n$ with sieve of eratosthenes in a boolean 1-indexed vector. Runs in $O(n \; log \; log \; n)$.},
+  label=lst:sieve-of-eratosthenes
+]{code/maths/sieve-of-eratosthenes.cpp}
+
+\subsubsection{Sum of Divisors}
+
+\lstinputlisting[
+  style=cpp,
+  caption={Calculates the sum of all divisors of number $n$. e.g. $sum\_of\_divisors(12)=18$. Runs in $O(\sqrt{n})$.},
+  label=lst:sum-of-divisors
+]{code/maths/sum-of-divisors.cpp}
+
+\lstinputlisting[
+  style=cpp,
+  caption={Calculates the sum of all divisors of all numbers from $1$ to $n$. Runs in $O(\,n\,log\,(n))$.},
+  label=lst:sum-of-divisors-sieve
+]{code/maths/sum-of-divisors-sieve.cpp}
+
+\subsection{Combinatorics}
+
+\subsubsection{Binomial Coefficients}
+
+\lstinputlisting[
+  style=cpp,
+  caption={Template for calculating binomial coefficients \texorpdfstring{$\binom{n}{k} = \frac{n!}{k! \, (n-k)!}$}{n choose k}. Precalculate \textit{fact} and \textit{inv} runs in $O(MAXN \cdot log_2(MOD))$ ($log_2(MOD) \approx 30$). So, in general case when $NMAX = 10^6$ and $MOD = 10^9+7$ can be generalizad to $O(n \cdot log(n)), \; n \leq 10^6$.},
+  label=lst:binomial-coefficients
+]{code/maths/binomial-coefficients.cpp}
+
+\subsubsection{Common combinatorics formulas}
+
+\begin{align}
+    &\displaystyle \binom{n}{2} = \frac{n \, (n-1)}{2} \\
+    &\displaystyle \sum_{k=0}^{n} \binom{n}{k} = 2^n \\
+    &\displaystyle \sum_{k=0}^n \binom{n}{k} \binom{n}{n-k} = \binom{2n}{n} \\
+    &\displaystyle \sum_{k=0}^n k \binom{n}{k} = n2^{n-1} \\
+    &\displaystyle \sum_{k=0}^\infty \binom{2k}{k} \binom{2n-2k}{n-k} = 4^n
+\end{align}
+
+\subsubsection{Stars and Bars}
+
+The number of ways to accomodate a binary string made of $n$ and $k$ elements.
+
+\noindent The number of ways I have to accomodate $n$ equal balls into $k$ bags.
+
+\begin{align*}
+  \displaystyle \binom{n +  k - 1}{k - 1} = \binom{n + k - 1}{n}
+\end{align*}
+
+\subsection{Probability}
+
+\subsection{Computational Geometry}
+
+\subsubsection{*Cross Product}
+
+\subsubsection{*Convex Hull}
+
+\subsection{Linear Algebra}
+
+\subsubsection{XOR Basis}
+
+\lstinputlisting[
+  style=cpp,
+  caption={Template for implementing XOR Basis and its operations: insert, max number doable, can do a certain number with that basis, merge two basis and find the k-th number doable.},
+  label=lst:xor-basis
+]{code/maths/xor-basis.cpp}
+
+\subsubsection{Matrix Exponentiation (Linear Recurrency)}
+
+\lstinputlisting[
+  style=cpp,
+  caption={Template to pow a matrix of size $n$ to a certain exponent with logarithmic time (using binpow), and multiply it to another matrix, with modulo operation, as well as how to use it. Full implementation for calculating \texttt{n-th} Fibonacci term with linear recurrency.},
+  label=lst:matrix-exponentiation
+]{code/maths/matrix-exponentiation.cpp}
+
+\subsubsection{*Fast Fourier Transform (FFT)}
+
+\section{Appendix}
+
+\subsection{What to do against WA?}
+
+\begin{enumerate}
+    \item Have you done the correct complexity analysis?
+    \item Have you understood well the statement?
+    \item Have you corroborated yet the trivial test cases?
+    \item Have you checked all the corner cases?
+    \item Have you proposed a lot of non-trivial test cases?
+    \item Isn't there any posisbilitie of overflow? (Multiplying two \texttt{int} needs to be fitted into a \texttt{long long})
+    \item Have you done a desktop test?
+    \item Have you red all the variables? (\texttt{tc} variable on \texttt{main})
+    \item Every part of your code works as it's meant to? 
+\end{enumerate}
+
+\subsection{Primitive sizes}
+
+\begin{center}
+    \begin{adjustbox}{max width=\columnwidth}
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{c|c|c|c}
+        \textbf{Data type} & \textbf{[B]} & \textbf{Minimun value it takes} & \textbf{Maximum value it takes} \\ \hline
+        bool & 1 & 0 & 1 \\ \hline
+        signed char & 1 & 0 & 255 \\
+        unsigned char & 1 & -128 & 127 \\ \hline
+        signed int & 4 & -2,147,483,648 $\approx -2 \times 10^9$ & 2,147,483,647 $\approx 2 \times 10^9$ \\
+        unsigned int & 4 & 0 & 4,294,967,295 $\approx 4 \times 10^9$ \\ \hline
+        signed short & 2 & -32,768 & 32,767 \\
+        unsigned short & 2 & 0 & 65,535 \\ \hline
+        signed long long int & 8 & -9,223,372,036,854,775,808 $\approx -9 \times 10^{18}$ & 9,223,372,036,854,775,807 $\approx 9 \times 10^{18}$ \\
+        unsigned long long int & 8 & 0 & 18,446,744,073,709,551,615 $\approx 18 \times 10^{18}$ \\ \hline
+        float & 4 & $1.1 \times 10^{-38}$ & $3.4 \times 10^{38}$ \\
+        double & 8 & $2.2 \times 10^{-308}$ & $1.7 \times 10^{308}$ \\
+        long double & 12 & $3.3 \times 10^{-4932}$ & $1.1 \times 10^{4932}$ \\
+    \end{tabular}
+    \end{adjustbox}
+    \captionsetup{hypcap=false}
+    \captionof{table}{Capacity of primitive data types in C++.}
+    \captionsetup{hypcap=true}
+\end{center}
+
+\newpage
+\subsection{Printable ASCII characters}
+
+\begin{center}
+    \begin{adjustbox}{max width=\columnwidth}
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{cc|cc|cc|cc}
+      32 & whitespace & 58 & : & 65 & A & 97 & a \\
+      33 & ! & 59 & ; & 66 & B & 98 & b \\
+      34 & " & 60 & < & 67 & C & 99 & c \\
+      35 & \# & 61 & = & 68 & D & 100 & d \\
+      36 & \$ & 62 & > & 69 & E & 101 & e \\
+      37 & \% & 63 & ? & 70 & F & 102 & f \\
+      38 & \& & 64 & @ & 71 & G & 103 & g \\
+      39 & \textquotesingle & 91 & [ & 72 & H & 104 & h \\
+      40 & ( & 92 & \textbackslash & 73 & I & 105 & i \\
+      41 & ) & 93 & ] & 74 & J & 106 & j \\
+      42 & * & 94 & $\wedge$ & 75 & K & 107 & k \\
+      43 & + & 95 & \_ & 76 & L & 108 & l \\
+      44 & , & 96 & ' & 77 & M & 109 & m \\
+      45 & - & 126 & \texttt{$\sim$} & 78 & N & 110 & n \\
+      46 & . & & & 79 & O & 111 & o \\
+      47 & / & & & 80 & P & 112 & p \\
+      48 & 0 & & & 81 & Q & 113 & q \\
+      49 & 1 & & & 82 & R & 114 & r \\
+      50 & 2 & & & 83 & S & 115 & s \\
+      51 & 3 & & & 84 & T & 116 & t \\
+      52 & 4 & & & 85 & U & 117 & u \\
+      53 & 5 & & & 86 & V & 118 & v \\
+      54 & 6 & & & 87 & W & 119 & w \\
+      55 & 7 & & & 88 & X & 120 & x \\
+      56 & 8 & & & 89 & Y & 121 & y \\
+      57 & 9 & & & 90 & Z & 122 & z \\
+    \end{tabular}
+    \end{adjustbox}
+    \captionsetup{hypcap=false}
+    \captionof{table}{Code and symbol of printable ASCII characters.}
+    \captionsetup{hypcap=true}
+\end{center}
+
+\subsection{Numbers bit representation}
+
+\begin{center}
+    \begin{adjustbox}{max width=\columnwidth}
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{c|c||c|c||c|c||c|c||c|c}
+      1 & 00000001 & 31 & 00011111 & 61 & 00111101 & 91 & 01011011 & 121 & 01111001 \\
+      2 & 00000010 & 32 & 00100000 & 62 & 00111110 & 92 & 01011100 & 122 & 01111010 \\
+      3 & 00000011 & 33 & 00100001 & 63 & 00111111 & 93 & 01011101 & 123 & 01111011 \\
+      4 & 00000100 & 34 & 00100010 & 64 & 01000000 & 94 & 01011110 & 124 & 01111100 \\
+      5 & 00000101 & 35 & 00100011 & 65 & 01000001 & 95 & 01011111 & 125 & 01111101 \\
+      6 & 00000110 & 36 & 00100100 & 66 & 01000010 & 96 & 01100000 & 126 & 01111110 \\
+      7 & 00000111 & 37 & 00100101 & 67 & 01000011 & 97 & 01100001 & 127 & 01111111 \\
+      8 & 00001000 & 38 & 00100110 & 68 & 01000100 & 98 & 01100010 & 128 & 10000000 \\
+      9 & 00001001 & 39 & 00100111 & 69 & 01000101 & 99 & 01100011 & 129 & 10000001 \\
+      10 & 00001010 & 40 & 00101000 & 70 & 01000110 & 100 & 01100100 & 130 & 10000010 \\
+      11 & 00001011 & 41 & 00101001 & 71 & 01000111 & 101 & 01100101 & 131 & 10000011 \\
+      12 & 00001100 & 42 & 00101010 & 72 & 01001000 & 102 & 01100110 & 132 & 10000100 \\
+      13 & 00001101 & 43 & 00101011 & 73 & 01001001 & 103 & 01100111 & 133 & 10000101 \\
+      14 & 00001110 & 44 & 00101100 & 74 & 01001010 & 104 & 01101000 & 134 & 10000110 \\
+      15 & 00001111 & 45 & 00101101 & 75 & 01001011 & 105 & 01101001 & 135 & 10000111 \\
+      16 & 00010000 & 46 & 00101110 & 76 & 01001100 & 106 & 01101010 & 136 & 10001000 \\
+      17 & 00010001 & 47 & 00101111 & 77 & 01001101 & 107 & 01101011 & 137 & 10001001 \\
+      18 & 00010010 & 48 & 00110000 & 78 & 01001110 & 108 & 01101100 & 138 & 10001010 \\
+      19 & 00010011 & 49 & 00110001 & 79 & 01001111 & 109 & 01101101 & 139 & 10001011 \\
+      20 & 00010100 & 50 & 00110010 & 80 & 01010000 & 110 & 01101110 & 140 & 10001100 \\
+      21 & 00010101 & 51 & 00110011 & 81 & 01010001 & 111 & 01101111 & 141 & 10001101 \\
+      22 & 00010110 & 52 & 00110100 & 82 & 01010010 & 112 & 01110000 & 142 & 10001110 \\
+      23 & 00010111 & 53 & 00110101 & 83 & 01010011 & 113 & 01110001 & 143 & 10001111 \\
+      24 & 00011000 & 54 & 00110110 & 84 & 01010100 & 114 & 01110010 & 144 & 10010000 \\
+      25 & 00011001 & 55 & 00110111 & 85 & 01010101 & 115 & 01110011 & 145 & 10010001 \\
+      26 & 00011010 & 56 & 00111000 & 86 & 01010110 & 116 & 01110100 & 146 & 10010010 \\
+      27 & 00011011 & 57 & 00111001 & 87 & 01010111 & 117 & 01110101 & 147 & 10010011 \\
+      28 & 00011100 & 58 & 00111010 & 88 & 01011000 & 118 & 01110110 & 148 & 10010100 \\
+      29 & 00011101 & 59 & 00111011 & 89 & 01011001 & 119 & 01110111 & 149 & 10010101 \\
+      30 & 00011110 & 60 & 00111100 & 90 & 01011010 & 120 & 01111000 & 150 & 10010110 \\
+    \end{tabular}
+    \end{adjustbox}
+\end{center}
+
+\subsection{How a \texttt{vector<vector<pair<int,int>>>} looks like}
+
+\begin{figure}[H]
+    \centerline{\includegraphics[width=0.6\columnwidth]{media/vvii_repre.png}}
+    \caption{Visual representation of a vector of vector of pairs.}
+    \label{fig:vvii_repre}
+\end{figure}
+
+\subsection{How all neighbours of a grid looks like}
+
+\begin{figure}[H]
+    \centerline{\includegraphics[width=0.8\columnwidth]{media/grid-neighbors.jpg}}
+    \caption{Visual representation of how all adjacent cells in a grid looks like.}
+    \label{fig:grid-neighbors}
+\end{figure}
+
+\end{document}
